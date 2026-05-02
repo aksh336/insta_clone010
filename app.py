@@ -34,7 +34,7 @@ app.config.update(
 )
 
 # DB CONFIG
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:akshay8052@localhost:5432/social_app'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB limit
 
@@ -580,4 +580,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
 
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000)
