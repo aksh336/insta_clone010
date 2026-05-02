@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(to right, #e0f7fa, #e1bee7);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* HEADER */
+   .header {
+  position: sticky;
+  top: 0;
+  height: auto;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
+  z-index: 1000;
+}
+/* SEARCH */
+.search-box {
+  flex: 1;
+}  
+    .search-box input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+    .title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+    }
+
+    .logout {
+      margin-left: auto;
+      text-decoration: none;
+      font-weight: bold;
+      color: #0095f6;
+    }
+
+    /* CONTAINER */
+    .container {
+      padding-top: 90px;
+      padding-left: 15px;
+      padding-right: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    /* POST CARD */
+    .post {
+      background: white;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: 0.25s;
+      padding: 12px;
+    }
+
+    .post:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    /* HEADER */
+   .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 10px 12px;
+}
+
+   .user_id-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user_id-box img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+    .user_id {
+      font-weight: bold;
+      font-size: 13px;
+      color: #1e3a8a;
+    }
+
+    .time {
+      font-size: 11px;
+      color: gray;
+    }
+
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: red;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+    /* MEDIA */
+    .media-box img,
+.media-box video {
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.media-box:hover img,
+.media-box:hover video {
+  transform: scale(1.02);
+}
+    
+
+    /* ACTIONS */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+
+    .like-btn {
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .likes {
+      font-size: 13px;
+      color: #374151;
+    }
+
+    /* CAPTION */
+    .caption {
+      padding: 0 12px;
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 5px;
+    }
+
+    /* COMMENTS */
+    .comments {
+      padding: 0 12px 12px;
+    }
+
+    .comment {
+      font-size: 13px;
+      margin: 4px 0;
+    }
+
+    .comment-box {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .comment-box input {
+      flex: 1;
+      border-radius: 20px;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .comment-box button {
+      border: none;
+      background: #3b82f6;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 50%;
+    }
+
+    /* NAVBAR */
+    .navbar {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+    .navbar a {
+      font-size: 22px;
+      text-decoration: none;
+    }
+
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      margin-top: 120px;
+      color: #1e3a8a;
+    }
+
+    .upload-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+    }
+    .post-wrapper {
+  margin-bottom: 25px;
+}
+
+/* MEDIA OUTSIDE CARD */
+.media-box {
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.media-box img,
+.media-box video {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* CARD STYLE */
+.post {
+  background: rgba(255,255,255,0.9);   /* 🔥 changed color */
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 10px;
+}
+.follow-btn {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  background: #3b82f6;
+  color: white;
+  text-decoration: none;
+  margin-top: 3px;
+  display: inline-block;
+}
+@media (max-width: 600px) {
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .logout {
+    text-align: right;
+  }
+
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+  
+  <div class="title">WELCOME TO MY WORLD</div>
+
+  <a class="logout" href="/logout">Logout</a>
+
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="/feed">🏠</a>
+  <a href="/search">🔍</a>
+  <a href="/upload">➕</a>
+  <a href="/profile">👤</a>
+</div>
+
+<!-- POSTS -->
+<div class="container">
+
+{% if posts and posts|length > 0 %}
+
+ {% for post in posts %}
+<div class="post-wrapper">
+
+ 
+
+  <!-- 🔥 POST CARD -->
+  <div class="post">
+
+    <!-- ✅ HEADER (FIXED ONLY POSITIONING LOGIC) -->
+    <div class="post-header">
+
+      <div class="user_id-box">
+       <img src="{{ url_for('static', filename='uploads/' + (user_ids[post.user_id_id].profile_pic if post.user_id_id in user_ids else 'default.jpg')) }}">
+
+        <div>
+          <div class="user_id">{{ user_ids[post.user_id_id].user_idname }}</div>
+          {% if post.user_id_id != user_id %}
+<a href="/profile/{{ post.user_id_id }}" style="font-size:11px; color:blue;">
+    View Profile
+</a>
+{% endif %}
+          {% if post.user_id_id != user_id %}
+  {% if post.user_id_id in following_list %}
+    <a href="/unfollow/{{ post.user_id_id }}" class="follow-btn">Following</a>
+  {% else %}
+    <a href="/follow/{{ post.user_id_id }}" class="follow-btn">Follow</a>
+  {% endif %}
+{% endif %}
+          <div class="time">
+            {{ post.created_at.strftime('%d %b %H:%M') }}
+          </div>
+        </div>
+      </div>
+
+      {% if post.user_id_id == user_id %}
+        <a href="/delete/{{ post.id }}" class="delete-btn">🗑</a>
+      {% endif %}
+
+    </div>
+     <!-- 🔥 MEDIA (UNCHANGED) -->
+  <div class="media-box">
+    {% if post.file_type == 'image' %}
+      <img src="{{ url_for('static', filename='uploads/' + post.file) }}">
+    {% else %}
+      <video controls>
+        <source src="{{ url_for('static', filename='uploads/' + post.file) }}">
+      </video>
+    {% endif %}
+  </div>
+
+    <!-- ❤️ ACTIONS -->
+    <div class="actions">
+      <a href="/like/{{ post.id }}" class="like-btn">❤️</a>
+      <span class="likes">{{ post.likes }} likes</span>
+    </div>
+
+    <!-- 📝 CAPTION -->
+    <div class="caption">
+      <b>{{ user_ids[post.user_id_id].user_idname }}</b> {{ post.caption }}
+    </div>
+
+    <!-- 💬 COMMENTS -->
+    <div class="comments">
+
+      <form action="/comment/{{ post.id }}" method="POST" class="comment-box">
+        <input type="text" name="text" placeholder="Write comment..." required>
+        <button type="submit">➤</button>
+      </form>
+
+      {% for comment in post_comments[post.id] %}
+        <p class="comment">
+          <b>@{{ comment.user_id }}</b> {{ comment.text }}
+        </p>
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+{% endfor %}
+
+
+{% else %}
+
+  <div class="empty">
+    <h2>📸 No Posts Yet</h2>
+    <p>Start sharing your world</p>
+    <a href="/upload" class="upload-btn">Upload First Post</a>
+  </div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

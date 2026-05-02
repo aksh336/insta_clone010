@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;   /* 🔥 mobile spacing */ 
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 380px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      max-height: 95vh;     /* 🔥 ADD */
+      overflow-y: auto;     /* 🔥 ADD */
+}
+    
+
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+
+      font-weight: bold;
+      cursor: pointer;
+       transform: scale(0.97);   /* 🔥 mobile tap feel */
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .preview {
+  width: 100%;
+  max-height: 220px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  display: none;
+  object-fit: cover;   /* 🔥 ADD */
+}
+      
+
+    .back {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #667eea;
+    }
+    .file-upload {
+  display: block;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.file-upload:hover {
+  border-color: #667eea;
+}
+
+.file-upload input {
+  display: none;
+}
+@media (max-width: 600px) {
+
+  .box {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  textarea {
+    height: 70px;
+  }
+
+}
+  </style>
+</head>
+
+<body>
+
+  <form method="POST" enctype="multipart/form-data" class="box">
+
+    <h2>Upload Post 📤</h2>
+
+    <!-- FILE -->
+   <label class="file-upload">
+  Tap to select photo/video 📁
+  <input type="file" name="file" id="fileInput" accept="image/*,video/*" required>
+</label>
+
+    <!-- PREVIEW -->
+    <img id="previewImg" class="preview">
+    <video id="previewVideo" class="preview" controls></video>
+
+    <!-- CAPTION -->
+    <textarea name="caption" placeholder="Write a caption..."></textarea>
+
+    <!-- OPTIONS (NEW FEATURE) -->
+    <select name="category">
+      <option value="general">General</option>
+      <option value="travel">Travel 🌍</option>
+      <option value="food">Food 🍔</option>
+      <option value="tech">Tech 💻</option>
+      <option value="funny">Funny 😂</option>
+    </select>
+
+    <button type="submit">Post Upload 🚀</button>
+
+    <a href="/feed" class="back">← Back to Feed</a>
+
+  </form>
+
+<script>
+const fileInput = document.getElementById("fileInput");
+const img = document.getElementById("previewImg");
+const video = document.getElementById("previewVideo");
+
+fileInput.addEventListener("change", function() {
+  const file = this.files[0];
+
+  if (!file) return;
+
+ const url = URL.createObjectURL(file);
+   img.style.display = "none";
+   video.style.display = "none";
+
+  if (file.type.startsWith("image")) {
+    img.style.display = "block";
+    video.style.display = "none";
+    img.src = url;
+  } 
+  else if (file.type.startsWith("video")) {
+    video.style.display = "block";
+    img.style.display = "none";
+    video.src = url;
+  }
+});
+</script>
+
+</body>
+</html>

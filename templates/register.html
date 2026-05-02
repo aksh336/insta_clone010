@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 360px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    input[type="file"] {
+      border: none;
+      padding: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+
+      background: #764ba2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5a3d91;
+    }
+
+    .link {
+      margin-top: 15px;
+      display: block;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form method="POST" enctype="multipart/form-data" class="box">
+
+    <h2>Create Account 🚀</h2>
+
+    <input type="text" name="user_idname" placeholder="user_idname" required>
+    <input type="password" name="password" placeholder="Password" required>
+
+    <input type="file" name="profile_pic">
+
+    <button type="submit">Register</button>
+
+    <a href="/login" class="link">Already have account? Login</a>
+
+  </form>
+
+</body>
+</html>

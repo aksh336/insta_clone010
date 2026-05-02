@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <form action="/search" method="GET" style="margin-bottom:15px;">
+  <input 
+    type="text" 
+    name="q" 
+    placeholder="Search users..." 
+    value="{{ query }}"
+    style="
+      width:100%;
+      padding:10px;
+      border-radius:20px;
+      border:1px solid #ddd;
+      outline:none;
+    ">
+</form>
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #e0f7fa, #e1bee7);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .user-card {
+      background: white;
+      padding: 12px;
+      border-radius: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .left img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .username {
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 5px 10px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 12px;
+      color: white;
+    }
+
+    .follow-btn {
+      background: #3b82f6;
+    }
+
+    .profile-btn {
+      background: #10b981;
+    }
+
+    .back {
+      display: block;
+      margin-top: 25px;
+      text-align: center;
+      text-decoration: none;
+      color: #3b82f6;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="title">Search Results for "{{ query }}"</div>
+
+{% if user_ids %}
+  {% for u in user_ids %}
+    <div class="user-card">
+
+      <!-- LEFT SIDE -->
+      <div class="left">
+        <img src="{{ url_for('static', filename='uploads/' + u.profile_pic) }}">
+        <div class="username">@{{ u.user_idname }}</div>
+      </div>
+
+      <!-- RIGHT SIDE ACTIONS -->
+      <div class="actions">
+
+        <!-- VIEW PROFILE BUTTON -->
+        <a href="/profile/{{ u.id }}" class="btn profile-btn">
+          View Profile
+        </a>
+
+        <!-- FOLLOW BUTTON -->
+        {% if u.id != session['user_id'] %}
+          <a href="/follow/{{ u.id }}" class="btn follow-btn">
+            Follow
+          </a>
+        {% endif %}
+
+      </div>
+
+    </div>
+  {% endfor %}
+{% else %}
+  <p style="text-align:center;">No users found 😢</p>
+{% endif %}
+
+<a href="/feed" class="back">⬅ Back to Feed</a>
+
+</body>
+</html>

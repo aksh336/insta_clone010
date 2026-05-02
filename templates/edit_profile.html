@@ -1,0 +1,90 @@
+   <!DOCTYPE html>
+
+<html>
+<head>
+  <title>Edit Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f7fb;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+  <h3>Edit Profile</h3>
+
+  <!-- PROFILE IMAGE -->
+
+  <img src="{{ url_for('static', filename='uploads/' + user.profile_pic) }}">
+
+  <!-- FORM -->
+
+  <form method="POST" enctype="multipart/form-data">
+
+  <textarea name="bio" placeholder="Write your bio...">{{ user.bio }}</textarea>
+
+  <input type="file" name="profile_pic">
+
+  <button type="submit">Save</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
