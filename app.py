@@ -559,6 +559,27 @@ def edit_profile():
 
     return render_template('edit_profile.html', user=user)
 
+#================== remove profile ============
+@app.route('/remove_profile_pic', methods=['POST'])
+def remove_profile_pic():
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    user = User.query.get(session['user_id'])
+
+    if user.profile_pic != "default.jpg":
+        try:
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], user.profile_pic)
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except:
+            pass
+
+    user.profile_pic = "default.jpg"
+    db.session.commit()
+
+    return redirect('/profile')
+
 
 # ================= DELETE =================
 @app.route('/delete/<int:post_id>')

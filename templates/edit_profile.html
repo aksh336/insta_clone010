@@ -72,6 +72,12 @@
 
   <img src="{{ url_for('static', filename='uploads/' + user.profile_pic) }}">
 
+  <form action="/remove_profile_pic" method="POST">
+    <button type="submit" style="background:red;color:white;padding:8px;">
+        Remove Profile Photo
+    </button>
+</form>
+
   <!-- FORM -->
 
   <form method="POST" enctype="multipart/form-data">
