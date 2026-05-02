@@ -34,7 +34,11 @@ app.config.update(
 )
 
 # DB CONFIG
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "DATABASE_URL",
+    "sqlite:///database.db"
+)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB limit
 
@@ -188,6 +192,10 @@ def login():
         return "Invalid username or password ❌"
 
     return render_template('login.html')
+
+@app.route('/')
+def index():
+    return redirect('/login')
    
 # ================= FEED =================
 @app.route('/feed')
