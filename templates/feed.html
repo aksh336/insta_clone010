@@ -6,25 +6,32 @@
 
   <style>
     body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(to right, #e0f7fa, #e1bee7);
-      min-height: 100vh;
-      padding-bottom: 80px;
-    }
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+
+  /* 🔥 PREMIUM DARK BACKGROUND */
+  background: radial-gradient(circle at top left, #1e1e2f, #0f0f1a 60%),
+              linear-gradient(135deg, #0f172a, #1e293b);
+
+  color: #e5e7eb;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
 
     /* HEADER */
-   .header {
+.header {
   position: sticky;
   top: 0;
   height: auto;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
   gap: 10px;
+  padding: 12px 15px;
   z-index: 1000;
 }
 /* SEARCH */
@@ -38,11 +45,14 @@
   border: 1px solid #ddd;
 }
     .title {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-weight: bold;
-    }
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  font-size: 15px;
+  color: #f9fafb;
+  letter-spacing: 1px;
+}
 
     .logout {
       margin-left: auto;
@@ -117,10 +127,14 @@
 }
 
     /* MEDIA */
-    .media-box img,
+   .media-box img,
 .media-box video {
   border-radius: 15px;
-  transition: 0.3s;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
 }
 
 .media-box:hover img,
@@ -187,19 +201,27 @@
     }
 
     /* NAVBAR */
-    .navbar {
+.navbar {
   position: fixed;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
+
   width: 90%;
   max-width: 400px;
+
   display: flex;
   justify-content: space-around;
+
   padding: 12px;
-  background: white;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+
   border-radius: 30px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
     .navbar a {
@@ -275,7 +297,17 @@
   .logout {
     text-align: right;
   }
+.caption {
+  color: #d1d5db;
+}
 
+.likes {
+  color: #9ca3af;
+}
+
+.comment {
+  color: #e5e7eb;
+}
 }
   </style>
 </head>
@@ -286,7 +318,7 @@
 <div class="header">
 
   
-  <div class="title">WELCOME TO MY WORLD</div>
+  <div class="title">MY WORLD</div>
 
   <a class="logout" href="/logout">Logout</a>
 
