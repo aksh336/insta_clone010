@@ -601,6 +601,13 @@ def delete_post(post_id):
 
     return redirect('/feed')
 
+#------------ reset db --------------
+@app.route('/resetdb')
+def resetdb():
+    db.drop_all()
+    db.create_all()
+    return "Database reset done"
+
 # ================= LOGOUT =================
 @app.route('/logout')
 def logout():
