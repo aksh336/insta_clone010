@@ -4,122 +4,188 @@
   <title>Upload</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      min-height: 100vh;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 15px;   /* 🔥 mobile spacing */ 
-      background: linear-gradient(135deg, #667eea, #764ba2);
-    }
-
-    .box {
-      background: white;
-      padding: 25px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 380px;
-
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      text-align: center;
-      max-height: 95vh;     /* 🔥 ADD */
-      overflow-y: auto;     /* 🔥 ADD */
+ <style>
+:root {
+  --bg: #0b0b12;
+  --glass: rgba(20, 20, 30, 0.75);
+  --gold: #d4af37;
+  --gold-soft: #f5d76e;
+  --text: #e5e7eb;
 }
-    
 
-    h2 {
-      margin-bottom: 15px;
-      color: #333;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
+  background:
+    radial-gradient(circle at top left, #1e1e2f, #0f0f1a 60%),
+    linear-gradient(135deg, #0f172a, #000);
 
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      outline: none;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    textarea {
-      resize: none;
-      height: 80px;
-    }
+  min-height: 100vh;
+  padding: 15px;
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
+/* 💎 GLASS BOX (MAIN PREMIUM CARD) */
+.box {
+  background: var(--glass);
+  backdrop-filter: blur(25px);
 
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 10px;
+  padding: 25px;
+  border-radius: 22px;
+  width: 92%;
+  max-width: 400px;
 
-      font-weight: bold;
-      cursor: pointer;
-       transform: scale(0.97);   /* 🔥 mobile tap feel */
-    }
+  border: 1px solid rgba(212,175,55,0.2);
 
-    button:hover {
-      background: #5a67d8;
-    }
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.8),
+    0 0 25px rgba(212,175,55,0.1);
 
-    .preview {
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ MIRROR REFLECTION EFFECT */
+.box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(212,175,55,0.08),
+    transparent
+  );
+
+  transform: rotate(25deg);
+  animation: shine 5s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+h2 {
+  color: var(--gold);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+/* INPUT FIELDS */
+input, textarea, select {
   width: 100%;
-  max-height: 220px;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  display: none;
-  object-fit: cover;   /* 🔥 ADD */
-}
-      
+  padding: 12px;
+  margin-bottom: 12px;
 
-    .back {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-      text-decoration: none;
-      color: #667eea;
-    }
-    .file-upload {
-  display: block;
-  padding: 20px;
-  border: 2px dashed #ccc;
   border-radius: 12px;
+  border: 1px solid rgba(212,175,55,0.2);
+
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(212,175,55,0.4);
+}
+
+/* TEXTAREA */
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* FILE UPLOAD BOX */
+.file-upload {
+  display: block;
+  padding: 18px;
+
+  border: 2px dashed rgba(212,175,55,0.3);
+  border-radius: 14px;
+
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 14px;
+
+  color: var(--gold-soft);
+  transition: 0.3s;
 }
 
 .file-upload:hover {
-  border-color: #667eea;
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212,175,55,0.2);
 }
 
 .file-upload input {
   display: none;
 }
-@media (max-width: 600px) {
 
+/* PREVIEW */
+.preview {
+  width: 100%;
+  max-height: 220px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  display: none;
+  object-fit: cover;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  color: black;
+
+  border: none;
+  border-radius: 12px;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  box-shadow: 0 0 15px rgba(212,175,55,0.3);
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(212,175,55,0.6);
+}
+
+/* BACK LINK */
+.back {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--gold-soft);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
   .box {
     padding: 18px;
     border-radius: 18px;
   }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  textarea {
-    height: 70px;
-  }
-
 }
-  </style>
+</style>
 </head>
 
 <body>

@@ -398,7 +398,7 @@
 
 <div id="welcome-screen">
   <div class="welcome-box">
-    <h1>Welcome to our app</h1>
+    <h1>---- WELCOME ----</h1>
   </div>
 </div>
 
@@ -416,8 +416,8 @@
 <div class="navbar">
   <a href="/feed">🏠</a>
   <a href="/search">🔍</a>
-  <a href="/upload">＋</a>
-  <a href="/profile">⦿</a>
+  <a href="/upload">➕</a>
+  <a href="/profile">👤</a>
 </div>
 
 <!-- POSTS -->
@@ -521,12 +521,22 @@
 </div>
 
 <script>
-  setTimeout(() => {
-    const screen = document.getElementById("welcome-screen");
-    if (screen) {
-      screen.style.display = "none";
+  window.onload = function () {
+    // check if user already saw welcome screen
+    if (localStorage.getItem("welcomeShown")) {
+      document.getElementById("welcome-screen").style.display = "none";
+    } else {
+      // show for 3 seconds then hide
+      setTimeout(() => {
+        const screen = document.getElementById("welcome-screen");
+        if (screen) {
+          screen.style.display = "none";
+        }
+        // mark as shown
+        localStorage.setItem("welcomeShown", "true");
+      }, 3000);
     }
-  }, 3000);
+  };
 </script>
 
 </body>
