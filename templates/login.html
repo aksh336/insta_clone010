@@ -125,6 +125,27 @@
         padding: 25px 20px;
       }
     }
+    .password-box {
+  position: relative;
+  width: 100%;
+}
+
+.password-box input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 40px;
+  border-radius: 12px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #d4af37;
+  font-size: 16px;
+}
 
   </style>
 </head>
@@ -136,7 +157,10 @@
     <h2>Welcome Back ✨</h2>
 
     <input type="text" name="user_idname" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
+    <div class="password-box">
+  <input type="password" name="password" placeholder="Password" required>
+  <span class="toggle-password" onclick="togglePassword(this)">👁</span>
+</div>
 
     <button type="submit">Login</button>
 
@@ -145,7 +169,6 @@
   </form>
 <script>
   localStorage.removeItem("welcomeShown");
-  localStorage.setItem("isLoggedIn", "true");
 </script>
 
 </body>
