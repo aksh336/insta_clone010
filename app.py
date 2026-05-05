@@ -53,6 +53,9 @@ class User(db.Model):
     bio = db.Column(db.String(300), default="")
     profile_pic = db.Column(db.String(200), default="default.jpg")
     posts = db.relationship('Post', backref='author', lazy=True)
+    status = db.Column(db.String(20), default="bronze")
+    reputation = db.Column(db.Integer, default=0)
+    is_verified = db.Column(db.Boolean, default=False)
 
 # ================= POSTS TABLE =================
 class Post(db.Model):
