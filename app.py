@@ -194,7 +194,7 @@ def login():
 
         if user and check_password_hash(user.password, password):
            session['user_id'] = user.id
-           session['role'] = user.status  # bronze / elite future
+           session['role'] = user.status  
            return redirect('/feed')
 
         return "Invalid username or password ❌"
@@ -326,8 +326,8 @@ def upload():
             file_type = 'video'
         else:
             file_type = 'image'
-            if not validate_image(file):
-             return "Invalid image ❌"
+        
+            return "Invalid image ❌"
 
         # create post
         new_post = Post(
@@ -495,8 +495,8 @@ def profile():
 
     user = User.query.get(session['user_id'])
 
-    if not User:
-        return redirect('/login')   # 🔥 FIX CRASH
+    if not user:
+     return redirect('/login')
 
     posts = Post.query.filter_by(user_id_id=session['user_id']).all()
 
