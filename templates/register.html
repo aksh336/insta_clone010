@@ -75,6 +75,7 @@
 
       outline: none;
       transition: 0.3s;
+      box-sizing: border-box;   /* 🔥 VERY IMPORTANT FIX */
     }
 
     input::placeholder {
@@ -131,16 +132,19 @@
         padding: 25px 20px;
       }
     }
-    .password-box {
+     .password-box {
   position: relative;
   width: 100%;
+  box-sizing: border-box;   /* 🔥 VERY IMPORTANT FIX */
 }
 
 .password-box input {
   width: 100%;
   padding: 12px;
-  padding-right: 40px;
+  padding-right: 45px;  /* space for eye icon */
   border-radius: 12px;
+  border-color: #d4af37;
+  box-shadow: 0 0 12px rgba(212,175,55,0.4);
 }
 
 .toggle-password {
@@ -150,7 +154,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   color: #d4af37;
-  font-size: 16px;
+  font-size: 14px;
 }
 
   </style>
