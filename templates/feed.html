@@ -6,6 +6,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+
+    #welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+
+  animation: fadeOut 0.5s ease forwards;
+  animation-delay: 2.5s;
+}
+
+.welcome-box h1 {
+  color: #d4af37;
+  font-size: 22px;
+  letter-spacing: 2px;
+
+  text-shadow: 0 0 15px rgba(212,175,55,0.6);
+
+  animation: zoomIn 0.8s ease;
+}
+
+/* animations */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
     :root {
   --bg-dark: #0b0b12;
   --card-dark: rgba(20, 20, 30, 0.85);
@@ -346,6 +395,13 @@
 
 <body>
 
+
+<div id="welcome-screen">
+  <div class="welcome-box">
+    <h1>Welcome to our app</h1>
+  </div>
+</div>
+
 <!-- HEADER -->
 <div class="header">
 
@@ -357,12 +413,12 @@
 </div>
 
 <!-- NAVBAR -->
-<div class="navbar">
-  <a href="/feed">⌂</a>
-  <a href="/search">⌕</a>
-  <a href="/upload" class="gold-icon">＋</a>
-  <a href="/profile" class="gold-icon">⦿</a>
-</div>
+<div class="navbar"></div>
+  <a href="/feed">🏠</a>
+  <a href="/search">🔍</a>
+  <a href="/upload">➕</a>
+  <a href="/profile">👤</a>
+</div><
 
 <!-- POSTS -->
 <div class="container">
@@ -463,6 +519,15 @@
 {% endif %}
 
 </div>
+
+<script>
+  setTimeout(() => {
+    const screen = document.getElementById("welcome-screen");
+    if (screen) {
+      screen.style.display = "none";
+    }
+  }, 3000);
+</script>
 
 </body>
 </html>
