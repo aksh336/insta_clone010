@@ -3,11 +3,21 @@
 <head>
   <title>Feed</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+  --bg-dark: #0b0b12;
+  --card-dark: rgba(20, 20, 30, 0.85);
+  --gold: #d4af37;
+  --gold-soft: #f5d76e;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
     body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   /* 🔥 PREMIUM DARK BACKGROUND */
   background: radial-gradient(circle at top left, #1e1e2f, #0f0f1a 60%),
@@ -23,9 +33,9 @@
   position: sticky;
   top: 0;
   height: auto;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(20,20,30,0.6);
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
 
   display: flex;
   justify-content: space-between;
@@ -50,8 +60,8 @@
   transform: translateX(-50%);
   font-weight: 600;
   font-size: 15px;
-  color: #f9fafb;
-  letter-spacing: 1px;
+  color: var(--gold);
+  letter-spacing: 2px;
 }
 
     .logout {
@@ -70,21 +80,29 @@
       margin: auto;
     }
 
-    /* POST CARD */
-    .post {
-      background: white;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      transition: 0.25s;
-      padding: 12px;
-    }
+    /* POST CARD */ 
+   .post {
+  background: var(--card-dark);
+  backdrop-filter: blur(20px);
+  border-radius: 18px;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  overflow: hidden;
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 15px rgba(212,175,55,0.05);
 
-    .post:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    }
+  transition: 0.3s ease;
+}
+
+.post:hover {
+  transform: translateY(-6px) scale(1.01);
+
+  box-shadow: 
+    0 20px 60px rgba(0,0,0,0.8),
+    0 0 25px rgba(212,175,55,0.2);
+}
 
     /* HEADER */
    .post-header {
@@ -107,10 +125,11 @@
   border-radius: 50%;
 }
     .user_id {
-      font-weight: bold;
-      font-size: 13px;
-      color: #1e3a8a;
-    }
+  color: var(--gold);
+  font-weight: bold;
+  font-size: 13px;
+}
+
 
     .time {
       font-size: 11px;
@@ -152,20 +171,27 @@
     }
 
     .like-btn {
-      font-size: 20px;
-      text-decoration: none;
-    }
+  font-size: 20px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.like-btn:hover {
+  color: var(--gold);
+  text-shadow: 0 0 10px var(--gold);
+}
+    
 
     .likes {
       font-size: 13px;
-      color: #374151;
+      color: var(--gold-soft);
     }
 
     /* CAPTION */
     .caption {
       padding: 0 12px;
       font-size: 14px;
-      color: #374151;
+      color: var(--gold);
       margin-bottom: 5px;
     }
 
@@ -187,17 +213,22 @@
 
     .comment-box input {
       flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212,175,55,0.2);
       border-radius: 20px;
       padding: 8px;
       border: 1px solid #ddd;
     }
 
     .comment-box button {
-      border: none;
-      background: #3b82f6;
-      color: white;
+      outline: none;
+      border: 1px solid var(--gold);
+      background: linear-gradient(135deg, #d4af37, #f5d76e);
+      color: black;
+      font-weight: 600;
       padding: 8px 12px;
       border-radius: 50%;
+      box-shadow: 0 0 10px rgba(212,175,55,0.3);
     }
 
     /* NAVBAR */
@@ -240,8 +271,9 @@
       display: inline-block;
       margin-top: 20px;
       padding: 12px 25px;
-      background: #3b82f6;
-      color: white;
+      background: linear-gradient(135deg, #d4af37, #f5d76e);
+      color: black;
+      font-weight: 600;
       text-decoration: none;
       border-radius: 25px;
     }
@@ -298,11 +330,11 @@
     text-align: right;
   }
 .caption {
-  color: #d1d5db;
+  color: var(--gold);
 }
 
 .likes {
-  color: #9ca3af;
+  color: var(--gold-soft);
 }
 
 .comment {
