@@ -32,6 +32,9 @@ app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax'
 )
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
+app.config['SESSION_COOKIE_SECURE'] = True  # production (Render)
 
 # DB CONFIG
 import os
@@ -56,6 +59,7 @@ class User(db.Model):
     status = db.Column(db.String(20), default="bronze")
     reputation = db.Column(db.Integer, default=0)
     is_verified = db.Column(db.Boolean, default=False)
+    role = db.Column(db.String(20), default="bronze")
 
 # ================= POSTS TABLE =================
 class Post(db.Model):
@@ -189,8 +193,9 @@ def login():
         user = User.query.filter_by(user_idname=username).first()
 
         if user and check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            return redirect('/feed')
+           session['user_id'] = user.id
+           session['role'] = user.status  # bronze / elite future
+        return redirect('/feed')
 
         return "Invalid username or password ❌"
 
@@ -278,7 +283,6 @@ def save_post(post_id):
 
     return redirect('/feed')
 
-def validate_image(file):
     if not file:
         return False
 
