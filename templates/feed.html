@@ -56,21 +56,20 @@
   }
 }
     :root {
-  --bg-dark: #0b0b12;
-  --card-dark: rgba(20, 20, 30, 0.85);
-  --gold: #d4af37;
+  --bg-main: #0b0b12;         /* deep black */
+  --wine: #4a0e1f;            /* burgundy wine */
+  --wine-soft: #7a1f3d;       
+  --gold: #d4af37;            /* royal gold */
   --gold-soft: #f5d76e;
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
+  --card: rgba(20, 10, 20, 0.75);  /* wine-black glass */
 }
-
     body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
 
-  /* 🔥 PREMIUM DARK BACKGROUND */
-  background: radial-gradient(circle at top left, #1e1e2f, #0f0f1a 60%),
-              linear-gradient(135deg, #0f172a, #1e293b);
+   background: radial-gradient(circle at top, #1a0b12, #0b0b12 60%),
+              linear-gradient(135deg, #0b0b12, #1a0b12);
+
 
   color: #e5e7eb;
   min-height: 100vh;
@@ -131,16 +130,20 @@
 
     /* POST CARD */ 
    .post {
-  background: var(--card-dark);
-  backdrop-filter: blur(20px);
-  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(74, 14, 31, 0.35),
+    rgba(10, 10, 15, 0.9)
+  );
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
   padding: 12px;
   margin-bottom: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   overflow: hidden;
-  box-shadow: 
-    0 10px 40px rgba(0,0,0,0.6),
-    0 0 15px rgba(212,175,55,0.05);
+    box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(74, 14, 31, 0.4);
 
   transition: 0.3s ease;
 }
@@ -148,10 +151,12 @@
 .post:hover {
   transform: translateY(-6px) scale(1.01);
 
-  box-shadow: 
-    0 20px 60px rgba(0,0,0,0.8),
-    0 0 25px rgba(212,175,55,0.2);
+    box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(212, 175, 55, 0.25),
+    0 0 60px rgba(74, 14, 31, 0.6);
 }
+
 
     /* HEADER */
    .post-header {
@@ -175,8 +180,8 @@
 }
     .user_id {
   color: var(--gold);
-  font-weight: bold;
-  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 
@@ -227,7 +232,7 @@
 
 .like-btn:hover {
   color: var(--gold);
-  text-shadow: 0 0 10px var(--gold);
+  text-shadow: 0 0 15px var(--gold);
 }
     
 
@@ -240,7 +245,7 @@
     .caption {
       padding: 0 12px;
       font-size: 14px;
-      color: var(--gold);
+      color: #f5d76e;
       margin-bottom: 5px;
     }
 
@@ -295,13 +300,13 @@
 
   padding: 12px;
 
-  background: rgba(255,255,255,0.08);
+  background: rgba(10, 10, 15, 0.75);
   backdrop-filter: blur(20px);
 
   border-radius: 30px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7);
 }
 
     .navbar a {
@@ -522,20 +527,28 @@
 
 <script>
   window.onload = function () {
-    // check if user already saw welcome screen
-    if (localStorage.getItem("welcomeShown")) {
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    // agar login hi nahi hai
+    if (!isLoggedIn) {
       document.getElementById("welcome-screen").style.display = "none";
-    } else {
-      // show for 3 seconds then hide
-      setTimeout(() => {
-        const screen = document.getElementById("welcome-screen");
-        if (screen) {
-          screen.style.display = "none";
-        }
-        // mark as shown
-        localStorage.setItem("welcomeShown", "true");
-      }, 3000);
+      return;
     }
+
+    // sirf 1 baar show
+    if (localStorage.getItem("welcomeShown") === "true") {
+      document.getElementById("welcome-screen").style.display = "none";
+      return;
+    }
+
+    setTimeout(() => {
+      const screen = document.getElementById("welcome-screen");
+      if (screen) screen.style.display = "none";
+
+      localStorage.setItem("welcomeShown", "true");
+
+    }, 2500);
   };
 </script>
 
