@@ -4,33 +4,62 @@
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-dark: #0b0b12;
+      --card-dark: rgba(20, 20, 30, 0.85);
+      --gold: #d4af37;
+      --gold-soft: #f5d76e;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
     body {
       margin: 0;
-      font-family: Arial;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+
+      background: radial-gradient(circle at top left, #1e1e2f, #0f0f1a 60%),
+                  linear-gradient(135deg, #0f172a, #1e293b);
 
       display: flex;
       justify-content: center;
       align-items: center;
-
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      color: var(--text-main);
     }
 
     .box {
-      background: white;
+      background: var(--card-dark);
+      backdrop-filter: blur(25px);
+
       padding: 30px;
       border-radius: 20px;
       width: 90%;
-      max-width: 350px;
+      max-width: 380px;
 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 1px solid rgba(212,175,55,0.2);
+
+      box-shadow:
+        0 10px 40px rgba(0,0,0,0.6),
+        0 0 20px rgba(212,175,55,0.1);
+
       text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.8),
+        0 0 30px rgba(212,175,55,0.25);
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #333;
+      color: var(--gold);
+      letter-spacing: 1px;
     }
 
     input {
@@ -38,47 +67,81 @@
       padding: 12px;
       margin-bottom: 15px;
 
-      border-radius: 10px;
-      border: 1px solid #ddd;
+      border-radius: 12px;
+      border: 1px solid rgba(212,175,55,0.2);
+
+      background: rgba(255,255,255,0.05);
+      color: white;
+
       outline: none;
+      transition: 0.3s;
+    }
+
+    input::placeholder {
+      color: var(--text-muted);
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(212,175,55,0.3);
     }
 
     button {
       width: 100%;
       padding: 12px;
 
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #d4af37, #f5d76e);
+      color: black;
 
-      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+
+      font-weight: 600;
       cursor: pointer;
+
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
     }
 
     button:hover {
-      background: #5a67d8;
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(212,175,55,0.6);
     }
 
     .link {
       margin-top: 15px;
       display: block;
       font-size: 14px;
+      color: var(--gold-soft);
+      text-decoration: none;
     }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .box {
+        padding: 25px 20px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
   <form method="POST" class="box">
-    <h2>Welcome Back 👋</h2>
 
-    <input type="text" name="user_idname" placeholder="user_idname" required>
+    <h2>Welcome Back ✨</h2>
+
+    <input type="text" name="user_idname" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
 
     <button type="submit">Login</button>
 
     <a href="/register" class="link">Create new account</a>
+
   </form>
 
 </body>
