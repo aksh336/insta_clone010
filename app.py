@@ -195,7 +195,7 @@ def login():
         if user and check_password_hash(user.password, password):
            session['user_id'] = user.id
            session['role'] = user.status  # bronze / elite future
-        return redirect('/feed')
+           return redirect('/feed')
 
         return "Invalid username or password ❌"
 
@@ -283,11 +283,6 @@ def save_post(post_id):
 
     return redirect('/feed')
 
-    if not file:
-        return False
-
-    mime_type = mimetypes.guess_type(file.filename)[0]
-    return mime_type and mime_type.startswith('image')
 
 # ================= UPLOAD =================
 @app.route('/upload', methods=['GET', 'POST'])
@@ -623,4 +618,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
 
-    socketio.run(app, host="0.0.0.0", port=5000)
+    socketio.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
