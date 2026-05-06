@@ -24,6 +24,7 @@ import uuid
 from flask_socketio import SocketIO, send
 
 socketio = SocketIO(app)
+os.makedirs("static/uploads", exist_ok=True)
 
 import os
 
@@ -327,7 +328,8 @@ def upload():
         else:
             file_type = 'image'
         
-            return "Invalid image ❌"
+            if not validate_image(file):
+             return "Invalid image ❌"
 
         # create post
         new_post = Post(
